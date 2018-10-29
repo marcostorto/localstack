@@ -22,9 +22,8 @@ def start_kinesis(port=PORT_KINESIS, asynchronous=False, shard_limit=100, update
     cmd = ('%s/node_modules/kinesalite/cli.js --shardLimit %s --port %s %s' %
         (ROOT_PATH, shard_limit, backend_port, kinesis_data_dir_param))
     print('Starting mock Kinesis (%s port %s)...' % (get_service_protocol(), port))
+    do_run(cmd, asynchronous)
     start_proxy_for_service('kinesis', port, backend_port, update_listener)
-    return do_run(cmd, asynchronous)
-
 
 def check_kinesis(expect_shutdown=False, print_error=False):
     out = None
